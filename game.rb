@@ -6,7 +6,7 @@ end
 def game_decide #ゲームの勝敗を決めるメソッド
 
 janken = janken();
-if janken == 'draw'; #じゃんけんがあいこの場合にじゃんけんを再戦。勝敗が決まるまで繰り返す。
+if janken == 2; #じゃんけんがあいこの場合にじゃんけんを再戦。勝敗が決まるまで繰り返す。
     puts "あいこで..."
     return false
 end
@@ -16,18 +16,17 @@ if !hoi_decide() #あっち向いてほいの勝敗決まらなかった場合�
     return false #falseで決着がつかなかったことを表す
 end
 
-if janken == 'win'; #じゃんけんで勝った状態で、あっち向いてほいの決着がつくとここが作動
+if janken == 1; #じゃんけんで勝った状態で、あっち向いてほいの決着がつくとここが作動
     puts "勝った！"
-elsif janken == 'lose'; #じゃんけんで勝っていない状態で、あっち向いてほいの決着がつくとここが作動
+else #じゃんけんで勝っていない状態で、あっち向いてほいの決着がつくとここが作動
     puts "負けちゃった！次は勝つぞ！"
 end
-
 return true #tureになったので終了(mainメソッドにtureを返すから)
 end
 
 
 
-def janken(); #ジャンケンメソッド
+def janken; #ジャンケンメソッド
 
 puts "じゃんけん...";
 puts "0(グー)1(チョキ)2(パー)4(戦わない)";
@@ -39,33 +38,32 @@ janken_you = rand(jankens.size); #プログラムの手
 
 puts "ポイ！";
 
-show_choice(jankens[janken_me], jankens[janken_you])
+show_choice(jankens[janken_me], jankens[janken_you]);
 
 result = 0; #resultの初期値として0をセット
 #負け：0,勝ち：1,あいこ：2(人間から見て)
 
 #あいこ
-if janken_me == janken_you
-    result = 'draw';
+if janken_me == janken_you;
+    result = 2;
 
 #勝ち
 elsif ((janken_me == 0 && janken_you == 1) || (janken_me == 1 && janken_you == 2) || (janken_me == 2 && janken_you == 0))
-    result == 'win';
+    result = 1;
 
 #負け
 elsif ((janken_me == 0 && janken_you == 2)||(janken_me == 1 && janken_you == 0)||(janken_me == 2 && janken_you == 1))
-    result == 'lose';
+    result = 0;
 
-#戦わない場合は終了
-elsif janken_me == 4
+else
     exit
 end
 
-return result
+return result;
 end
 
 
-def hoi_decide
+def hoi_decide;
 puts "あっち向いて...";
 puts "0(上)1(下)2(左)3(右)";
 
@@ -88,4 +86,4 @@ def show_choice(choice_me, choice_you) #じゃんけんやあっち向いてホ�
 end
 
 
-main()
+main();
